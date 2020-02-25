@@ -57,8 +57,7 @@ namespace ApiImplementation
                 // objects are created and populated. 
                 if (response.IsSuccessStatusCode && apiChoice == 1)
                 {
-                    IpApiModel data;
-                    data = await response.Content.ReadAsAsync<IpApiModel>();
+                    IpApiModel data = await response.Content.ReadAsAsync<IpApiModel>();
 
                     trueData.Success = true;
                     trueData.City = data.City;
@@ -72,8 +71,7 @@ namespace ApiImplementation
                 }
                 else if (response.IsSuccessStatusCode && apiChoice == 2 && IpOrHostname != "")
                 {
-                    IpStackModel data;
-                    data = await response.Content.ReadAsAsync<IpStackModel>();
+                    IpStackModel data = await response.Content.ReadAsAsync<IpStackModel>();
 
                     trueData.Success = true;
                     trueData.City = data.City;
