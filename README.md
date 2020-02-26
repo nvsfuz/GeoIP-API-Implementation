@@ -2,7 +2,7 @@
 A console program which pulls geolocation data from 2 different API's. 
 
 # How does it work?
-It should work just as an .exe file, or if you're interested in looking at the code, run via Visual Studio IDE.
+After downloading the package you can either move to ApiImplementation/bin/Debug and open the ApiImplementation.exe or, if you're interested in looking at the code, run ApplicationTest.sln via Visual Studio IDE.
 
 Once running, the ApiHelper will setup a HTTP client, making it possible for the program to communicate with
 the API.
