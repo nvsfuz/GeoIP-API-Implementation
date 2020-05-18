@@ -1,21 +1,21 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace ApiImplementation
+﻿namespace ApiImplementation
 {
-	using Old;
-	using Providers;
+    using System;
+    using System.Threading.Tasks;
+    using static System.Console;
 
-	class Program
+    using Providers;
+
+    class Program
     {
         static void Main(string[] args)
         {
             do
             {
-                Console.Clear();
+                Clear();
                 ApiHelper.InitializeClient();
                 RunAsync().GetAwaiter().GetResult();
-                Console.ReadKey();
+                ReadKey();
             } while (true);
         }
 
@@ -25,31 +25,31 @@ namespace ApiImplementation
 
             try
             {
-                Console.Write("Enter IP or Hostname: ");
-                string path = Console.ReadLine();
+                Write("Enter IP or Hostname: ");
+                string path = ReadLine();
 
                 // Loop will continue to ask for int 1 or 2 until one is chosen.
                 do
                 {
                     try
                     {
-                        Console.Clear();
-                        Console.Write("Would you like to use api.ipstack or ip.api?\n1: api.ipstack\n2: ip.api\nChoice: ");
-                        apiChoice = Convert.ToInt32(Console.ReadLine());
+                        Clear();
+                        Write("Would you like to use api.ipstack or ip.api?\n1: api.ipstack\n2: ip.api\nChoice: ");
+                        apiChoice = Convert.ToInt32(ReadLine());
                         if (apiChoice != 1 && apiChoice != 2)
                         {
-                            Console.WriteLine("Your input must be either 1 or 2!");
-                            Console.ReadKey();
+                            WriteLine("Your input must be either 1 or 2!");
+                            ReadKey();
                         }
                     }
                     catch (FormatException ex)
                     {
-                        Console.WriteLine("Your input must be a number!\n\n" + ex);
-                        Console.ReadKey();
+                        WriteLine("Your input must be a number!\n\n" + ex);
+                        ReadKey();
                     }
                 } while (apiChoice != 1 && apiChoice != 2);
 
-                Console.Clear();
+                Clear();
 
                 GeoIpDataProvider provider = null;
 
@@ -57,12 +57,12 @@ namespace ApiImplementation
                 // ip.api defaults to own ip if no IpOrHostname is specified
                 if (apiChoice == 1)
                 {
-                    Console.WriteLine("API: ip.api");
+                    WriteLine("API: ip.api");
                     provider = new IpApiGeoIpDataProvider();
                 }
                 else if (apiChoice == 2)
                 {
-                    Console.WriteLine("API: api.ipstack");
+                    WriteLine("API: api.ipstack");
                     provider = new IpStackGeoIpDataProvider();
                 }
                 else
@@ -74,18 +74,18 @@ namespace ApiImplementation
 
                 var geo = await service.GetGeoIpInfo(path);
 
-                Console.WriteLine("IP Adress: " + geo.Ip + 
-                    "\nCity: " + geo.City + 
-                    "\nCountry: " + geo.Country + 
-                    "\nLatitude: " + geo.Latitude + 
-                    "\nLongitude: " + geo.Longitude + 
-                    "\nRegion: " + geo.RegionCode + 
-                    "\nZip Code: " + geo.ZipCode + 
+                WriteLine("IP Adress: " + geo.Ip +
+                    "\nCity: " + geo.City +
+                    "\nCountry: " + geo.Country +
+                    "\nLatitude: " + geo.Latitude +
+                    "\nLongitude: " + geo.Longitude +
+                    "\nRegion: " + geo.RegionCode +
+                    "\nZip Code: " + geo.ZipCode +
                     "\nTimezone: " + geo.TimeZone);
             }
             catch (InvalidOperationException e)
             {
-                Console.WriteLine("An error occured!\nError code: " + e + "\n\nTry again.");
+                WriteLine("An error occured!\nError code: " + e + "\n\nTry again.");
             }
         }
     }

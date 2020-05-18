@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using static System.Console;
 
 	public abstract class Figure
 	{
@@ -39,6 +40,24 @@
 		}
 	}
 
+	public class Triangle : Figure
+	{
+		public decimal Width { get; }
+		public decimal Height { get; }
+		public decimal CoordinateX { get; }
+		public decimal CoordinateY { get; }
+
+		public Triangle (decimal width, decimal height)
+		{
+			this.Width = width;
+			this.Height = height;
+		}
+
+		public override decimal CalculateSquare()
+		{
+			return this.Width * ((decimal)0.5 * this.Height);
+		}
+	}
 
 	public class Foo
 	{
@@ -48,13 +67,21 @@
 
 			var circle = new Circle(20);
 			var rectangle = new Rectangle(10, 30);
+			var triangle = new Triangle(15, 5);
 
 			figures.Add(circle);
 			figures.Add(rectangle);
+			figures.Add(triangle);
+
+			Clear();
+
+			decimal summarySquare = 0;
+
+			WriteLine("Square calculations:\n");
 
 			foreach (var figure in figures)
 			{
-				figure.CalculateSquare();
+				summarySquare += figure.CalculateSquare();
 			}
 		}
 	}

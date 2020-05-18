@@ -1,8 +1,7 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-
-namespace ApiImplementation
+﻿namespace ApiImplementation
 {
+    using System.Net.Http;
+    using System.Net.Http.Headers;
     class ApiHelper
     {
 

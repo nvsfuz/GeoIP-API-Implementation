@@ -45,3 +45,15 @@ D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.cspr
 D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.csproj.CopyComplete
 D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.exe
 D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.pdb
+C:\Projects\geoip\ApiImplementation\bin\Debug\ApiImplementation.exe.config
+C:\Projects\geoip\ApiImplementation\bin\Debug\ApiImplementation.exe
+C:\Projects\geoip\ApiImplementation\bin\Debug\ApiImplementation.pdb
+C:\Projects\geoip\ApiImplementation\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\geoip\ApiImplementation\bin\Debug\System.Net.Http.Formatting.dll
+C:\Projects\geoip\ApiImplementation\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\geoip\ApiImplementation\bin\Debug\System.Net.Http.Formatting.xml
+C:\Projects\geoip\ApiImplementation\obj\Debug\ApiImplementation.csprojAssemblyReference.cache
+C:\Projects\geoip\ApiImplementation\obj\Debug\ApiImplementation.csproj.CoreCompileInputs.cache
+C:\Projects\geoip\ApiImplementation\obj\Debug\ApiImplementation.csproj.CopyComplete
+C:\Projects\geoip\ApiImplementation\obj\Debug\ApiImplementation.exe
+C:\Projects\geoip\ApiImplementation\obj\Debug\ApiImplementation.pdb
