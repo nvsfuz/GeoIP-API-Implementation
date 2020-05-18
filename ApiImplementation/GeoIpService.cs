@@ -8,110 +8,72 @@ namespace ApiImplementation
     {
         /// <summary>
         /// Method obtains information from API based on user input.
-        /// Overloaded with IP or a Hostname.
         /// </summary>
-        /// <param name="IpOrHostname"></param>
+        /// <param name="IpOrHostname">IP or Hostname of desired domain.</param>
+        /// <param name="ApiChoice">The choice of API to get info from. 1: ip-api. 2: ipstack.</param>
         /// <returns></returns>
-        public static async Task<GeoIpInfo> GetGeoIpInfo(string IpOrHostname)
+        public static async Task<GeoIpInfo> GetGeoIpInfo(string IpOrHostname, int ApiChoice)
         {
-            string url = "";
-            int apiChoice = 0;
+            GeoIpInfo returnedApiData = new GeoIpInfo();
 
-            // Loop will continue to ask for int 1 or 2 until one is chosen.
-            do
-            {
-                try
-                {
-                    Console.Clear();
-                    Console.Write("Would you like to use api.ipstack or ip.api?\n1: api.ipstack\n2: ip.api\nChoice: ");
-                    apiChoice = Convert.ToInt32(Console.ReadLine());
-                    if (apiChoice != 1 && apiChoice != 2)
-                    {
-                        Console.WriteLine("Your input must be either 1 or 2!");
-                        Console.ReadKey();
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Your input must be either 1 or 2!");
-                    Console.ReadKey();
-                }
-            } while (apiChoice != 1 && apiChoice != 2);
+            string ApiPath = "";
 
             // Creating the url based on API chosen
-            if (apiChoice == 1)
+            if (ApiChoice == 1)
             {
-                url = "http://ip-api.com/json/" + IpOrHostname;
+                ApiPath = "http://ip-api.com/json/" + IpOrHostname;
             }
-            else if (apiChoice == 2)
+            else if (ApiChoice == 2)
             {
-                url = "http://api.ipstack.com/" + IpOrHostname + "?access_key=6321b3b977c6c1dc41e59b05728d7cd0";
+                ApiPath = "http://api.ipstack.com/" + IpOrHostname + "?access_key=6321b3b977c6c1dc41e59b05728d7cd0";
             }
-
-            GeoIpInfo trueData = new GeoIpInfo();
 
             // Awaits a response from the API
-            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(ApiPath))
             {
                 // If API response is successful, depending on what API was chosen, 
                 // objects are created and populated. 
-                if (response.IsSuccessStatusCode && apiChoice == 1)
+                if (response.IsSuccessStatusCode && ApiChoice == 1)
                 {
                     IpApiModel data = await response.Content.ReadAsAsync<IpApiModel>();
 
-                    trueData.Success = true;
-                    trueData.City = data.City;
-                    trueData.Country = data.Country;
-                    trueData.Ip = data.Query;
-                    trueData.Latitude = data.Lat;
-                    trueData.Longitude = data.Lon;
-                    trueData.RegionCode = data.Region;
-                    trueData.TimeZone = data.Timezone;
-                    trueData.ZipCode = data.Zip;
+                    returnedApiData.Success = true;
+                    returnedApiData.City = data.City;
+                    returnedApiData.Country = data.Country;
+                    returnedApiData.Ip = data.Query;
+                    returnedApiData.Latitude = data.Lat;
+                    returnedApiData.Longitude = data.Lon;
+                    returnedApiData.RegionCode = data.Region;
+                    returnedApiData.TimeZone = data.Timezone;
+                    returnedApiData.ZipCode = data.Zip;
                 }
-                else if (response.IsSuccessStatusCode && apiChoice == 2 && IpOrHostname != "")
+                else if (response.IsSuccessStatusCode && ApiChoice == 2 && IpOrHostname != "")
                 {
                     IpStackModel data = await response.Content.ReadAsAsync<IpStackModel>();
 
-                    trueData.Success = true;
-                    trueData.City = data.City;
-                    trueData.Country = data.Country_Name;
-                    trueData.Ip = data.Ip;
-                    trueData.Latitude = data.Latitude;
-                    trueData.Longitude = data.Longitude;
-                    trueData.RegionCode = data.Region_Name;
-                    trueData.TimeZone = "N/A";
-                    trueData.ZipCode = data.Zip;
+                    returnedApiData.Success = true;
+                    returnedApiData.City = data.City;
+                    returnedApiData.Country = data.Country_Name;
+                    returnedApiData.Ip = data.Ip;
+                    returnedApiData.Latitude = data.Latitude;
+                    returnedApiData.Longitude = data.Longitude;
+                    returnedApiData.RegionCode = data.Region_Name;
+                    returnedApiData.TimeZone = "N/A";
+                    returnedApiData.ZipCode = data.Zip;
+                }
+                else
+                {
+                    returnedApiData.City = "";
+                    returnedApiData.Country = "";
+                    returnedApiData.Ip = "";
+                    returnedApiData.RegionCode = "";
+                    returnedApiData.TimeZone = "";
+                    returnedApiData.ZipCode = "";
+                    returnedApiData.Longitude = null;
+                    returnedApiData.Latitude = null;
+                }
 
-                }
-                else if (trueData.Success == false)
-                {
-                    trueData.City = "";
-                    trueData.Country = "";
-                    trueData.Ip = "";
-                    trueData.RegionCode = "";
-                    trueData.TimeZone = "";
-                    trueData.ZipCode = "";
-                    trueData.Longitude = null;
-                    trueData.Latitude = null;
-                }
-                Console.Clear();
-
-                // Shows which API was used, unless IpOrHostname is blank and ipstack is used
-                // ip.api defaults to own ip if no IpOrHostname is specified
-                if (apiChoice == 1)
-                {
-                    Console.WriteLine("API: ip.api");
-                }
-                else if (apiChoice == 2 && IpOrHostname != "")
-                {
-                    Console.WriteLine("API: api.ipstack");
-                }
-                else if (IpOrHostname == "")
-                {
-                    Console.WriteLine("Invalid query");
-                }
-                return trueData;
+                return returnedApiData;
             }
         }
     }
