@@ -51,16 +51,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiHelper.cs" />
-    <Compile Include="GeoIpInfo.cs" />
     <Compile Include="GeoIpService.cs" />
-    <Compile Include="IpApiModel.cs" />
-    <Compile Include="IpStackModel.cs" />
+    <Compile Include="Models\GeoIpInfo.cs" />
+    <Compile Include="Old\GeoIpService.cs" />
+    <Compile Include="Models\IpApiModel.cs" />
+    <Compile Include="Models\IpStackModel.cs" />
+    <Compile Include="OOPExamples.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\GeoIpDataProvider.cs" />
+    <Compile Include="Providers\IpApiGeoIpDataProvider.cs" />
+    <Compile Include="Providers\IpStackGeoIpDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

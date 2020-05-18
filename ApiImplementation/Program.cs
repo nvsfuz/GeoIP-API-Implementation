@@ -3,7 +3,10 @@ using System.Threading.Tasks;
 
 namespace ApiImplementation
 {
-    class Program
+	using Old;
+	using Providers;
+
+	class Program
     {
         static void Main(string[] args)
         {
@@ -48,22 +51,29 @@ namespace ApiImplementation
 
                 Console.Clear();
 
+                GeoIpDataProvider provider = null;
+
                 // Shows which API was used, unless IpOrHostname is blank and ipstack is used
                 // ip.api defaults to own ip if no IpOrHostname is specified
                 if (apiChoice == 1)
                 {
                     Console.WriteLine("API: ip.api");
+                    provider = new IpApiGeoIpDataProvider();
                 }
                 else if (apiChoice == 2)
                 {
                     Console.WriteLine("API: api.ipstack");
+                    provider = new IpStackGeoIpDataProvider();
                 }
                 else
                 {
                     throw new InvalidOperationException("Invalid query.");
                 }
 
-                GeoIpInfo geo = await GeoIpService.GetGeoIpInfo(path, apiChoice);
+                var service = new GeoIpService(provider);
+
+                var geo = await service.GetGeoIpInfo(path);
+
                 Console.WriteLine("IP Adress: " + geo.Ip + 
                     "\nCity: " + geo.City + 
                     "\nCountry: " + geo.Country + 

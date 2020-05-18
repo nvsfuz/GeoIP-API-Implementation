@@ -33,3 +33,15 @@ C:\Users\sycho\Desktop\GeoIP-API-Implementation-master\GeoIP-API-Implementation-
 C:\Users\sycho\Desktop\GeoIP-API-Implementation-master\GeoIP-API-Implementation-master\ApiImplementation\obj\Debug\ApiImplementation.csproj.CopyComplete
 C:\Users\sycho\Desktop\GeoIP-API-Implementation-master\GeoIP-API-Implementation-master\ApiImplementation\obj\Debug\ApiImplementation.exe
 C:\Users\sycho\Desktop\GeoIP-API-Implementation-master\GeoIP-API-Implementation-master\ApiImplementation\obj\Debug\ApiImplementation.pdb
+D:\Projects\test tasks\niklas\ApiImplementation\bin\Debug\ApiImplementation.exe.config
+D:\Projects\test tasks\niklas\ApiImplementation\bin\Debug\ApiImplementation.exe
+D:\Projects\test tasks\niklas\ApiImplementation\bin\Debug\ApiImplementation.pdb
+D:\Projects\test tasks\niklas\ApiImplementation\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\test tasks\niklas\ApiImplementation\bin\Debug\System.Net.Http.Formatting.dll
+D:\Projects\test tasks\niklas\ApiImplementation\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\test tasks\niklas\ApiImplementation\bin\Debug\System.Net.Http.Formatting.xml
+D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.csprojAssemblyReference.cache
+D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.csproj.CoreCompileInputs.cache
+D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.csproj.CopyComplete
+D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.exe
+D:\Projects\test tasks\niklas\ApiImplementation\obj\Debug\ApiImplementation.pdb

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace ApiImplementation
 {
     class ApiHelper
     {
+
         public static HttpClient ApiClient { get; set; }
         /// <summary>
         /// Initializer for HTTP Client, so we can access our API
