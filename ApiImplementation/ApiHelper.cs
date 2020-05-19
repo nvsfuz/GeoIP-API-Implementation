@@ -2,7 +2,8 @@
 {
     using System.Net.Http;
     using System.Net.Http.Headers;
-    class ApiHelper
+
+    internal class ApiHelper
     {
 
         public static HttpClient ApiClient { get; set; }

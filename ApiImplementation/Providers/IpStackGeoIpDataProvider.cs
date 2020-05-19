@@ -5,16 +5,16 @@
 
     public class IpStackGeoIpDataProvider : GeoIpDataProvider
 	{
-		private readonly string ApiPath = "http://api.ipstack.com/";
-		private readonly string ApiSuffix = "?access_key=6321b3b977c6c1dc41e59b05728d7cd0";
+		const string ApiPath = "http://api.ipstack.com/";
+		const string ApiSuffix = "?access_key=6321b3b977c6c1dc41e59b05728d7cd0";
 
 		public override async Task<GeoIpInfo> GetData(string ipOrHostname)
 		{
-			GeoIpInfo returnedApiData = new GeoIpInfo();
+			var returnedApiData = new GeoIpInfo();
 
-			using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(ApiPath + ipOrHostname + ApiSuffix))
+			using (var response = await ApiHelper.ApiClient.GetAsync(ApiPath + ipOrHostname + ApiSuffix))
 			{
-				IpStackModel data = await response.Content.ReadAsAsync<IpStackModel>();
+				var data = await response.Content.ReadAsAsync<IpStackModel>();
 
 				returnedApiData.Success = true;
 				returnedApiData.City = data.City;
