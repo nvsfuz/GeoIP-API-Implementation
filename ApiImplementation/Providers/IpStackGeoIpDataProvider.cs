@@ -3,16 +3,16 @@
 	using System.Threading.Tasks;
     using System.Net.Http;
 
-    public class IpStackGeoIpDataProvider : GeoIpDataProvider
+	public class IpStackGeoIpDataProvider : GeoIpDataProvider
 	{
-		const string ApiPath = "http://api.ipstack.com/";
-		const string ApiSuffix = "?access_key=6321b3b977c6c1dc41e59b05728d7cd0";
+		private const string ApiPath = "http://api.ipstack.com/";
+		private const string ApiSuffix = "?access_key=6321b3b977c6c1dc41e59b05728d7cd0";
 
 		public override async Task<GeoIpInfo> GetData(string ipOrHostname)
 		{
 			var returnedApiData = new GeoIpInfo();
 
-			using (var response = await ApiHelper.ApiClient.GetAsync(ApiPath + ipOrHostname + ApiSuffix))
+			using (var response = await this.ApiClient.GetAsync(ApiPath + ipOrHostname + ApiSuffix))
 			{
 				var data = await response.Content.ReadAsAsync<IpStackModel>();
 
@@ -29,5 +29,6 @@
 
 			return returnedApiData;
 		}
+
 	}
 }

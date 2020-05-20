@@ -5,15 +5,15 @@
 
 	public class IpApiGeoIpDataProvider : GeoIpDataProvider
 	{
-		private string ApiPath = "http://ip-api.com/json/";
+		private const string ApiPath = "http://ip-api.com/json/";
 
 		public override async Task<GeoIpInfo> GetData(string ipOrHostname)
 		{
-			GeoIpInfo returnedApiData = new GeoIpInfo();
+			var returnedApiData = new GeoIpInfo();
 
-			using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(ApiPath + ipOrHostname))
+			using (var response = await this.ApiClient.GetAsync(ApiPath + ipOrHostname))
 			{
-				IpApiModel data = await response.Content.ReadAsAsync<IpApiModel>();
+				var data = await response.Content.ReadAsAsync<IpApiModel>();
 
 				returnedApiData.Success = true;
 				returnedApiData.City = data.City;

@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiHelper.cs" />
     <Compile Include="GeoIpService.cs" />
     <Compile Include="Models\GeoIpInfo.cs" />
     <Compile Include="Models\IpApiModel.cs" />

@@ -13,7 +13,6 @@
             do
             {
                 Clear();
-                ApiHelper.InitializeClient();
                 RunAsync().GetAwaiter().GetResult();
                 ReadKey();
             } while (true);
