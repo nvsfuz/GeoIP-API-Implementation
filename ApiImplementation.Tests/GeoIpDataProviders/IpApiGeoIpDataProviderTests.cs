@@ -1,9 +1,6 @@
 ﻿namespace GeoIp.Tests.GeoIpDataProviders
 {
-	using System.Net;
-	using System.Net.Http;
 	using System.Threading.Tasks;
-	using Moq;
 	using NSubstitute;
 	using Providers;
 	using Xunit;

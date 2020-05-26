@@ -15,7 +15,7 @@
 		{
 			var returnedApiData = new GeoIpInfo();
 
-			var dataString = await this.GetStringResponseAsync(ApiPath + ipOrHostname);
+			var dataString = await this.GetStringResponseAsync(ApiPath + ipOrHostname + ApiSuffix);
 
 			var data = JsonConvert.DeserializeObject<IpStackModel>(dataString);
 
