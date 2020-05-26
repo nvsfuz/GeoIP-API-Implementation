@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiImplementation.Tests.GeoIpDataProviders
+﻿namespace GeoIp.Tests.GeoIpDataProviders
 {
-    class IpStackGeoIpDataProviderTests
+	class IpStackGeoIpDataProviderTests
     {
     }
 }

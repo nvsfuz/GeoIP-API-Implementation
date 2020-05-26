@@ -1,4 +1,4 @@
-﻿namespace ApiImplementation
+﻿namespace GeoIp.Models
 {
     public class GeoIpInfo
     {

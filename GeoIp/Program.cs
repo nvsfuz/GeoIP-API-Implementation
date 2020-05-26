@@ -1,22 +1,23 @@
-﻿namespace ApiImplementation
+﻿namespace GeoIp
 {
-    using System;
+	using System;
     using System.Threading.Tasks;
-    using static System.Console;
-
-    using Providers;
+	using ApiImplementation;
+	using ApiImplementation.Providers;
+	using Providers;
+	using static System.Console;
 
     class Program
-    {
-        static void Main(string[] args)
-        {
-            do
-            {
-                Clear();
-                RunAsync().GetAwaiter().GetResult();
-                ReadKey();
-            } while (true);
-        }
+	{
+		static void Main(string[] args)
+		{
+			do
+			{
+				Clear();
+				RunAsync().GetAwaiter().GetResult();
+				ReadKey();
+			} while (true);
+		}
 
         static async Task RunAsync()
         {

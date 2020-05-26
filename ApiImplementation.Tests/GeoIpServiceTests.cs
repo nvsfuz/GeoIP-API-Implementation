@@ -1,11 +1,13 @@
-namespace ApiImplementation.Tests
+namespace GeoIp.Tests
 {
-    using ApiImplementation;
-    using Moq;
-    using System.Threading.Tasks;
-    using Xunit;
+	using System.Threading.Tasks;
+	using ApiImplementation;
+	using Models;
+	using Moq;
+	using Providers;
+	using Xunit;
 
-    public class GeoIpServiceTests
+	public class GeoIpServiceTests
     {
         private const string Host1 = "host1";
         private readonly GeoIpInfo expectedForHost1 = new GeoIpInfo(Host1);
@@ -13,11 +15,11 @@ namespace ApiImplementation.Tests
         private const string Host2 = "host2";
         private readonly GeoIpInfo expectedForHost2 = new GeoIpInfo(Host2);
 
-        private Providers.GeoIpDataProvider mockedProvider;
+        private GeoIpDataProvider mockedProvider;
 
         public GeoIpServiceTests()
         {
-            var mock = new Mock<Providers.GeoIpDataProvider>();
+            var mock = new Mock<GeoIpDataProvider>();
             mock.Setup(x => x.GetData(Host1)).ReturnsAsync(this.expectedForHost1);
             mock.Setup(x => x.GetData(Host2)).ReturnsAsync(this.expectedForHost2);
 
