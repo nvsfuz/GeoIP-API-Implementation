@@ -2,6 +2,12 @@
 {
     public class GeoIpInfo
     {
+        public GeoIpInfo() { }
+        public GeoIpInfo(string ip)
+        {
+	        this.Ip = ip;
+        }
+
         public bool Success { get; internal set; } = false;
         public string Ip { get; internal set; }
         public string TimeZone { get; internal set; }
