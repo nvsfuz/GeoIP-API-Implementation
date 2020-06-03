@@ -1,6 +1,6 @@
 ﻿namespace GeoIp.Models
 {
-    class IpStackModel
+    public class IpStackModel : IApiDataModel
     {
         public bool Success { get; set; }
         public string Ip { get; set; }
@@ -10,7 +10,5 @@
         public string Zip { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
-
     }
-    
 }

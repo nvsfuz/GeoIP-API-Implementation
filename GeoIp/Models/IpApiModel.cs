@@ -1,6 +1,6 @@
 ﻿namespace GeoIp.Models
 {
-    class IpApiModel
+	public class IpApiModel : IApiDataModel
     {
         public string Status { get; set; }
         public string Query { get; set; }

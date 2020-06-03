@@ -4,29 +4,31 @@
 	using Models;
 	using Newtonsoft.Json;
 
-	public class IpApiGeoIpDataProvider : GeoIpDataProvider
+	public class IpApiGeoIpDataProvider : GeoIpDataProvider<IpApiModel>
 	{
 		private const string ApiPath = "http://ip-api.com/json/";
 
-		public override async Task<GeoIpInfo> GetData(string ipOrHostname)
+		protected override async Task<GeoIpInfo> AdaptToTargetModel(IpApiModel data)
 		{
-			var returnedApiData = new GeoIpInfo();
-
-			var dataString = await this.GetStringResponseAsync(ApiPath + ipOrHostname);
-
-			var data = JsonConvert.DeserializeObject<IpApiModel>(dataString);
-
-			returnedApiData.Success = true;
-			returnedApiData.City = data.City;
-			returnedApiData.Country = data.Country;
-			returnedApiData.Ip = data.Query;
-			returnedApiData.Latitude = data.Lat;
-			returnedApiData.Longitude = data.Lon;
-			returnedApiData.RegionCode = data.Region;
-			returnedApiData.TimeZone = data.Timezone;
-			returnedApiData.ZipCode = data.Zip;
+			var returnedApiData = new GeoIpInfo
+			{
+				Success = true,
+				City = data.City,
+				Country = data.Country,
+				Ip = data.Query,
+				Latitude = data.Lat,
+				Longitude = data.Lon,
+				RegionCode = data.Region,
+				TimeZone = data.Timezone,
+				ZipCode = data.Zip
+			};
 
 			return returnedApiData;
+		}
+
+		protected override async Task<string> CallTheApi(string ipOrHostname)
+		{
+			return await this.GetStringResponseAsync(ApiPath + ipOrHostname);
 		}
 	}
 }

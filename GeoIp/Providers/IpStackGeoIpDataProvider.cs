@@ -6,31 +6,32 @@
 	using GeoIp.Providers;
 	using Newtonsoft.Json;
 
-	public class IpStackGeoIpDataProvider : GeoIpDataProvider
+	public class IpStackGeoIpDataProvider : GeoIpDataProvider<IpStackModel>
 	{
 		private const string ApiPath = "http://api.ipstack.com/";
 		private const string ApiSuffix = "?access_key=6321b3b977c6c1dc41e59b05728d7cd0";
 
-		public override async Task<GeoIpInfo> GetData(string ipOrHostname)
+		protected override async Task<GeoIpInfo> AdaptToTargetModel(IpStackModel data)
 		{
-			var returnedApiData = new GeoIpInfo();
-
-			var dataString = await this.GetStringResponseAsync(ApiPath + ipOrHostname + ApiSuffix);
-
-			var data = JsonConvert.DeserializeObject<IpStackModel>(dataString);
-
-			returnedApiData.Success = true;
-			returnedApiData.City = data.City;
-			returnedApiData.Country = data.Country_Name;
-			returnedApiData.Ip = data.Ip;
-			returnedApiData.Latitude = data.Latitude;
-			returnedApiData.Longitude = data.Longitude;
-			returnedApiData.RegionCode = data.Region_Name;
-			returnedApiData.TimeZone = "N/A";
-			returnedApiData.ZipCode = data.Zip;
+			var returnedApiData = new GeoIpInfo
+			{
+				Success = true,
+				City = data.City,
+				Country = data.Country_Name,
+				Ip = data.Ip,
+				Latitude = data.Latitude,
+				Longitude = data.Longitude,
+				RegionCode = data.Region_Name,
+				TimeZone = "N/A",
+				ZipCode = data.Zip
+			};
 
 			return returnedApiData;
 		}
 
+		protected override async Task<string> CallTheApi(string ipOrHostname)
+		{
+			return await this.GetStringResponseAsync(ApiPath + ipOrHostname + ApiSuffix);
+		}
 	}
 }

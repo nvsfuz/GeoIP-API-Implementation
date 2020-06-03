@@ -1,6 +1,5 @@
 ﻿namespace ApiImplementation
 {
-	using Providers;
 	using System.Threading.Tasks;
 	using GeoIp.Models;
 	using GeoIp.Providers;
