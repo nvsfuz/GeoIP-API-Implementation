@@ -1,5 +1,4 @@
-﻿
-namespace GeoIp.Tests.GeoIpDataProviders
+﻿namespace GeoIp.Tests.GeoIpDataProviders
 {
     using ApiImplementation.Providers;
     using Xunit;
