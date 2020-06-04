@@ -10,25 +10,21 @@
 
     class Program
 	{
-        static readonly Container ipApiContainer;
-        static readonly Container ipStackContainer;
-        static readonly Container ipService;
+        static readonly Container apiContainer;
+        //static readonly Container ipService;
 
         static Program()
         {
             // Create new SimpleInjector container
-            ipApiContainer = new Container();
-            ipStackContainer = new Container();
+            apiContainer = new Container();
             //ipService = new Container();
 
             // Configure container (register)
-            ipApiContainer.Register<GeoIpDataProvider, IpApiGeoIpDataProvider>();
-            ipStackContainer.Register<GeoIpDataProvider, IpStackGeoIpDataProvider>();
+            apiContainer.Collection.Register<GeoIpDataProvider>(typeof(IpApiGeoIpDataProvider), typeof(IpStackGeoIpDataProvider));
             //ipService.Register<GeoIpService>();
 
             // Verify configuration
-            ipApiContainer.Verify();
-            ipStackContainer.Verify();
+            apiContainer.Verify();
             //ipService.Verify();
         }
 
@@ -81,12 +77,12 @@
                 if (apiChoice == 1)
                 {
                     WriteLine("API: ip.api");
-                    provider = ipApiContainer.GetInstance<GeoIpDataProvider>();
+                    provider = apiContainer.GetInstance<IpApiGeoIpDataProvider>();
                 }
                 else if (apiChoice == 2)
                 {
                     WriteLine("API: api.ipstack");
-                    provider = ipStackContainer.GetInstance<GeoIpDataProvider>();
+                    provider = apiContainer.GetInstance<IpStackGeoIpDataProvider>();
                 }
                 else
                 {
