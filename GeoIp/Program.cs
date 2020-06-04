@@ -1,14 +1,37 @@
 ﻿namespace GeoIp
 {
-	using System;
+    using System;
     using System.Threading.Tasks;
-	using ApiImplementation;
-	using ApiImplementation.Providers;
-	using Providers;
-	using static System.Console;
+    using ApiImplementation;
+    using ApiImplementation.Providers;
+    using Providers;
+    using SimpleInjector;
+    using static System.Console;
 
     class Program
 	{
+        static readonly Container ipApiContainer;
+        static readonly Container ipStackContainer;
+        static readonly Container ipService;
+
+        static Program()
+        {
+            // Create new SimpleInjector container
+            ipApiContainer = new Container();
+            ipStackContainer = new Container();
+            //ipService = new Container();
+
+            // Configure container (register)
+            ipApiContainer.Register<GeoIpDataProvider, IpApiGeoIpDataProvider>();
+            ipStackContainer.Register<GeoIpDataProvider, IpStackGeoIpDataProvider>();
+            //ipService.Register<GeoIpService>();
+
+            // Verify configuration
+            ipApiContainer.Verify();
+            ipStackContainer.Verify();
+            //ipService.Verify();
+        }
+
 		static void Main(string[] args)
 		{
 			do
@@ -21,12 +44,12 @@
 
         static async Task RunAsync()
         {
-            int apiChoice = 0;
+            var apiChoice = 0;
 
             try
             {
                 Write("Enter IP or Hostname: ");
-                string path = ReadLine();
+                var path = ReadLine();
 
                 // Loop will continue to ask for int 1 or 2 until one is chosen.
                 do
@@ -58,18 +81,18 @@
                 if (apiChoice == 1)
                 {
                     WriteLine("API: ip.api");
-                    provider = new IpApiGeoIpDataProvider();
+                    provider = ipApiContainer.GetInstance<GeoIpDataProvider>();
                 }
                 else if (apiChoice == 2)
                 {
                     WriteLine("API: api.ipstack");
-                    provider = new IpStackGeoIpDataProvider();
+                    provider = ipStackContainer.GetInstance<GeoIpDataProvider>();
                 }
                 else
                 {
                     throw new InvalidOperationException("Invalid query.");
                 }
-
+                
                 var service = new GeoIpService(provider);
 
                 var geo = await service.GetGeoIpInfo(path);
