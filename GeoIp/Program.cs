@@ -20,7 +20,9 @@
             //ipService = new Container();
 
             // Configure container (register)
-            apiContainer.Collection.Register<GeoIpDataProvider>(typeof(IpApiGeoIpDataProvider), typeof(IpStackGeoIpDataProvider));
+            apiContainer.Register<GeoIpService>();
+            apiContainer.Register<GeoIpDataProvider, IpStackGeoIpDataProvider>();
+            //apiContainer.Collection.Register<GeoIpDataProvider>(typeof(IpApiGeoIpDataProvider));
             //ipService.Register<GeoIpService>();
 
             // Verify configuration
@@ -88,8 +90,9 @@
                 {
                     throw new InvalidOperationException("Invalid query.");
                 }
-                
-                var service = new GeoIpService(provider);
+
+                var service = apiContainer.GetInstance<GeoIpService>();
+                //var service = new GeoIpService(provider);
 
                 var geo = await service.GetGeoIpInfo(path);
 
